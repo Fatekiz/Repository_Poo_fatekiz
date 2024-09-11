@@ -48,3 +48,24 @@ print(len(triangulo1))
 
 # Verifica si los lados forman un triángulo válido
 print(triangulo1.es_valido())
+
+#            ########### FINALIZADOR o DESTRUCTORES (Métodos) ###########
+
+"""Métodos creados cuando un objeto está a punto de ser destruido/eliminado de la memoria
+y el método asociado a la destrucción de objetos es ' __del__' """
+
+# Ejemeplo:
+
+class Item():
+    def __init__(self,nombre):
+        self.nombre = nombre
+
+    def nombre_item(self):
+        print(f"Se creó un objeto llamado '{self.nombre}' ")
+
+    def __del__(self):
+        print(f"El objeto '{self.nombre}' está siendo destruído")
+
+lapiz = Item("Lapiz")
+
+lapiz.nombre_item()
