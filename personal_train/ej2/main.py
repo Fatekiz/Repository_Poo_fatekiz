@@ -24,7 +24,11 @@ class Tienda():
             for cancion in self.stock:
                 print(f" {cancion['nombre']} - {cancion['artista']} - {cancion['genero']} - ${cancion['precio']} - unidades: {cancion['disponible']} ") # debo usar comillas simples
         
-    def 
+    def modificar_stock(self,nombre):
+        for i in self.stock:
+            if i == self.stock[nombre]
+        
+        pass
 
 
 canciones_iniciales = [
