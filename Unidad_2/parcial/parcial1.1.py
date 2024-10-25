@@ -1,3 +1,6 @@
+# Este código lo voy avanzando a medida que tengo tiempo
+
+
 # Cafetería de gatos 
 
 # Peticiones Gatos en café:
@@ -21,23 +24,48 @@ class Gato(): #Clase para la creaciones de los gatos
         self.energia = energia
         self.hambre = hambre
     
-    def jugar(self,accion): # Para jugar con los gatos | LISTO
+    def newJugar(self,accion,juguete): # Para newJugar con los gatos | LISTO
+
+
         if self.energia <= 0 or self.hambre <= 0:
-            print("El gato no tiene suficiente energía o hambre para poder jugar contigo. Alimentalo o dejalo descasar! (verifica su estado)")
+            print("El gato no tiene suficiente energía o hambre para poder newJugar contigo. Alimentalo o dejalo descasar! (verifica su estado)")
         else:
             print(f"Jugarás con el/la gato(a): {self.__nombre} | En este momento: Energía = {self.energia} Hambre = {self.hambre} ")
-            if accion == "rodar":
-                print(f"\n Hiciste que el(la) gato(a) {self.__nombre} ruede en el piso \n")
-                self.energia = self.energia - 25 
-                self.hambre = self.hambre - 40
-            if accion == "saltar":
-                print(f"\n ¡Hiciste que el gato {self.__nombre} saltara hasta tu altura! \n")
-                self.energia = self.energia - 50
-                self.hambre = self.hambre - 25
+            if accion == "rodar":                                                                                              # <-- se debe jugar con el segundo argumento "nada"
+                if juguete == "nada":
+                    print(f"\n Hiciste que el(la) gato(a) {self.__nombre} ruede en el piso \n")
+                    self.energia = self.energia - 25 
+                    self.hambre = self.hambre - 40
+            if accion == "saltar":                                 #                                              <--- se debe jugar con el segundo argumento "pelota"
+                if juguete == pelota:
+                    if juguete.cantidad >= 1:
+                        
+                        print(f"\n ¡Hiciste que el gato {self.__nombre} saltara hasta tu altura! \n")
+                        self.energia = self.energia - 50
+                        self.hambre = self.hambre - 25
+                        juguete.cantidad -=1
+                    else:
+                        print("No se encuentra disponible el juguete seleccionado, cambielo o reponga su cantidad en el stock")
+                else:
+                    print("No se encuentra en el stock de juguetes el juguete seleccionado por usted.")
+            else:
+                print("No puede realizar esa acción con el gato")
 
-    def alimentar(self): # para alimentar el gato | LISTO
-        print(f"\n ¡Bien, alimentaste al(la) gato(a) {self.__nombre} !\n")
-        self.hambre = self.hambre + 70
+
+    def newAlimentar(self,producto): # funcion para alimentar segun inventario exitosa!
+        if producto == salmon:
+            if producto.cantidad >= 1:
+                self.hambre = self.hambre + 70 # se incrementa el nvl de hambre
+                producto.cantidad -= 1 # se resta uno
+                print(f"\n ¡Bien, alimentaste al(la) gato(a) {self.__nombre} !\n")
+            else: 
+                print(f"El alimento: '{producto.nombre}' no tiene stock, ¡se debe rellenar!")
+        else:
+            print("No esta dispopnible el alimento que usted indicó.")
+            
+        
+        
+        
 
     def descansar(self): # para hacer descansar el gato  | LISTO
         print(f"El(la) gato(a) {self.__nombre} se sentó en tus piernas, le hiciste cariño y ahora está descansando")
@@ -80,22 +108,16 @@ class Producto():
     def __init__(self,nombre,cantidad):
         self.nombre = nombre
         self.cantidad = cantidad # inicial de cada producto
-    
+        self.stock = []
 
-    #def usar(self,producto): # para usar cada producto 
-     #   if producto == "pelota":
-    
-       # elif producto == "salmon":
-        
-
-# clase para el inventario de productos
-class Inventario():
-    def __init__(self):
-        self.stock = [] # Lista vacia 
-    
-    
     def agregar(self,producto):
         self.stock.append(producto) 
+        print(f"Se ha agregado tu producto {producto.nombre}")
+
+    def restaurar(self,producto,cantidad):
+        if producto == salmon:
+            self.cantidad += cantidad
+    
 
 
 
@@ -121,8 +143,7 @@ salmon = Producto("salmon",1)
 
 
 
-
-#..........................................
+#....................................................
 # MOSTRANDO LAS INFOS DE LOS GATOS
 print(gato1)
 print(gato2)
@@ -131,14 +152,18 @@ print(gato4)
 print(gato5)
 
 # JUGANDO CON GATOS
-gato1.jugar("rodar")
-gato1.jugar("saltar")
-gato2.jugar("saltar")
-gato1.jugar("rodar") # aca no hay suficiente energía para poder jugar con el gato y nos mostrará la advertencia
+gato1.newJugar("rodar","nada")
+gato1.newJugar("saltar",pelota)
+gato2.newJugar("saltar",pelota)
+gato1.newJugar("rodar","nada") # aca no hay suficiente energía para poder newJugar con el gato y nos mostrará la advertencia
 print(gato1) # imprimiendo info
-gato1.alimentar()
+gato1.newAlimentar(salmon)
+gato1.newAlimentar(salmon)
+salmon.restaurar(salmon,2)
+gato1.newAlimentar(salmon)
+#gato1.alimentar()
 gato1.descansar() #alimentandolos y haciendolos descansar 
-gato1.jugar("rodar") # volviendo a jugar
+gato1.newJugar("rodar","nada") # volviendo a newJugar
 
 # INGRESANDO GATOS A LAS AREAS
 area1.agregar(gato1)
@@ -152,4 +177,4 @@ area2.agregar(gato5)
 area1.mostrar_cantidad()
 area2.mostrar_cantidad()
 
-# ME FALTA AGREGAR LOS PRODUCTOS A SU RESPECTIVA LISTA.
+
