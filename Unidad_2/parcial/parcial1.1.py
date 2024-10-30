@@ -72,8 +72,18 @@ class Gato(): #Clase para la creaciones de los gatos
         self.energia = self.energia + 50
 
 
-    def __str__(self): # para mostrar la información del gato
-        return f"\n Información Completa y actual del gato:\n | Nombre: {self.__nombre} |\n | Color del gato: {self.__color} |\n | Color de ojos del gato: {self.__color_ojos} |\n | energia: {self.energia} |\n | hambre: {self.hambre} |\n  "
+    def __str__(self): # método mágico para mostrar la información del gato.
+        e_hambre = ""
+        e_energia = ""
+        if self.hambre > 0:
+            e_hambre = "Sin hambre"
+        elif self.hambre <= 0:
+            e_hambre = "Hambriento"
+        if self.energia > 0: 
+            e_energia = "El gato se encuentra con energía"
+        elif self.energia <= 0:
+            e_energia = "El gato no tiene suficiente energía"
+        return f"\n Información Completa y actual del gato:\n | Nombre: {self.__nombre} |\n | Color del gato: {self.__color} |\n | Color de ojos del gato: {self.__color_ojos} |\n | energia: {self.energia} | estado de energia {e_energia} | \n | hambre: {self.hambre} | estado de hambre: {e_hambre}  \n  "
     
     def get_nombre(self):  
         return self.__nombre        # <--- con este método publico podria acceder a los nombres aunque sean privados. (pero solo con esta manera) 
@@ -177,4 +187,4 @@ area2.agregar(gato5)
 area1.mostrar_cantidad()
 area2.mostrar_cantidad()
 
-
+#                                   EJERCICIO TERMINADO EN 190 lineas de código :| , gracias profe me ayudo xd :D
