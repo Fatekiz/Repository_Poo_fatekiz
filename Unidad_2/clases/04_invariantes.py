@@ -20,7 +20,7 @@ class CuentaBancaria:
     
     def depositarse(self,monto):
         # precondicion
-        assert monto <= 0, "Error: El monto a depositar no puede ser 0 o un monto en negativo."
+        assert monto > 0, "Error: El monto a depositar no puede ser 0 o un monto en negativo."
         self.__saldo += monto
     
 
@@ -32,6 +32,6 @@ class CuentaBancaria:
     def info(self):
         print(f"la cuenta de {self.titular} tiene: ${self.__saldo}")
 
-C_falabella = CuentaBancaria("Benja",30000)
+C_falabella = CuentaBancaria("Benja",30000,0)
 C_falabella.saldo = 29000
 C_falabella.info()
