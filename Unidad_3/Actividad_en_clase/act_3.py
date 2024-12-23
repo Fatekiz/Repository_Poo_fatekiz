@@ -1,3 +1,4 @@
+
 """
 Una empresa está intentando desarrollar un sistema de gestión de pagos, admite diferentes tipos de pago:
 - Tarjetas de crédito (la tarjeta debe ser validada previamente)
